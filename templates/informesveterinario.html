@@ -4,7 +4,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informes de Empleados</title>
+    <title>Informes de Veterinarios</title>
     <link rel="stylesheet" href="../static/css/informes.css">
 </head>
 <body>
@@ -12,12 +12,13 @@
         <a href="{{ url_for('inicio') }}">
             <img alt="Logo Ganaderos Unidos" class="h-16" height="100" src="../static/imagenes/Logo-pagina.png" width="100"/>
         </a>
-        <h1 class="text-2xl font-bold text-gray-800">Informes de Empleados</h1>
+        <h1 class="text-2xl font-bold text-gray-800">Informes de Veterinarios</h1>
         <div class="max-w-4xl mx-auto mt-6 flex justify-between">
             <a href="{{ url_for('inicio') }}" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition duration-300">Ir a Inicio</a>
-            <a href="{{ url_for('registrar_empleado') }}" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">Registrar empleado</a>
+            <a href="{{ url_for('registrar_veterinario') }}" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">Registrar Veterinario</a>
         </div>
     </div>
+
     <div>
         <table>
             <thead>
@@ -25,24 +26,24 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Estado Civil</th>
                     <th>Teléfono</th>
-                    <th>Fecha de Ingreso</th>
-                    <th>Fecha de Nacimiento</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
+                    <th>Especialidad</th>
                     <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
-                {% for empleado in empleados %}
+                {% for veterinario in veterinarios %}
                 <tr>
-                    <td>{{ empleado.idEmpleado }}</td>
-                    <td>{{ empleado.nombreEmpleado }}</td>
-                    <td>{{ empleado.apellidoEmpleado }}</td>
-                    <td>{{ empleado.estadoCivil }}</td>
-                    <td>{{ empleado.telefonoEmpleado }}</td>
-                    <td>{{ empleado.fechaIngreso }}</td>
-                    <td>{{ empleado.fechaNacimiento }}</td>
-                    <td>{{ 'Activo' if empleado.estado == 1 else 'Inactivo' }}</td>
+                    <td>{{ veterinario.idVeterinario }}</td>
+                    <td>{{ veterinario.nombreVeterinario }}</td>
+                    <td>{{ veterinario.apellidoVeterinario }}</td>
+                    <td>{{ veterinario.telefonoVeterinario }}</td>
+                    <td>{{ veterinario.correoVeterinario }}</td>
+                    <td>{{ veterinario.direccionVeterinario }}</td>
+                    <td>{{ veterinario.descripcionEspecialidad }}</td>
+                    <td>{{ 'Activo' if veterinario.estado == 1 else 'Inactivo' }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -100,8 +100,8 @@ def guardar_datos_animal(datos):
         cursor.execute(query, valores)
         conexion.commit()
         print("Datos del animal guardados correctamente.")
-    except mysql.connector.Error as err:
-        print(f"Error al guardar los datos: {err}")
+    except Exception as e:
+        print(f"Error al guardar los datos: {e}")
     finally:
         cursor.close()
         conexion.close()
@@ -710,6 +710,182 @@ def informes_vacunas():
     except mysql.connector.Error as err:
         print(f"Error al obtener los datos de las vacunas: {err}")
         return "Error al obtener los datos de las vacunas", 500
+    finally:
+        cursor.close()
+        conexion.close()
+
+#Funcion para registrar especialidad
+@app.route("/registrar_especialidad", methods=["GET", "POST"])
+def registrar_especialidad():
+    if request.method == "POST":
+        # Capturar los datos del formulario
+        idEspecialidad = int(request.form["idEspecialidad"])
+        descripcionEspecialidad = request.form["descripcionEspecialidad"]
+        estado = int(request.form["estado"])
+
+        # Crear un diccionario con los datos de la especialidad
+        datos_especialidad = {
+            "idEspecialidad": idEspecialidad,
+            "descripcionEspecialidad": descripcionEspecialidad,
+            "estado": estado
+        }
+
+        # Guardar los datos en la base de datos
+        guardar_datos_especialidad(datos_especialidad)
+        flash("Especialidad registrada correctamente.", "success")
+        return redirect(url_for("registrar_especialidad"))  # Recarga la página actual
+    else:
+        # Mostrar el formulario (GET)
+        return render_template("registrarespecialidad.html")
+
+# Función para guardar los datos de la especialidad en la base de datos
+def guardar_datos_especialidad(datos):
+    conexion = conectar_mysql()
+    if conexion is None:
+        return
+
+    try:
+        cursor = conexion.cursor()
+        query = """
+        INSERT INTO especialidad (idEspecialidad, descripcionEspecialidad, estado)
+        VALUES (%s, %s, %s)
+        """
+        valores = (
+            datos["idEspecialidad"],
+            datos["descripcionEspecialidad"],
+            datos["estado"]
+        )
+        cursor.execute(query, valores)
+        conexion.commit()
+        print("Datos de la especialidad guardados correctamente.")
+    except mysql.connector.Error as err:
+        print(f"Error al guardar los datos: {err}")
+    finally:
+        cursor.close()
+        conexion.close()
+
+@app.route("/informes_especialidades")
+def informes_especialidades():
+    conexion = conectar_mysql()
+    if conexion is None:
+        return "Error al conectar a la base de datos", 500
+
+    try:
+        cursor = conexion.cursor(dictionary=True)
+        query = "SELECT idEspecialidad, descripcionEspecialidad, estado FROM especialidad"
+        cursor.execute(query)
+        especialidades = cursor.fetchall()
+        return render_template("informesespecialidad.html", especialidades=especialidades)
+    except mysql.connector.Error as err:
+        print(f"Error al obtener los datos de las especialidades: {err}")
+        return "Error al obtener los datos de las especialidades", 500
+    finally:
+        cursor.close()
+        conexion.close()
+
+#Funcion para registrar veterinarios
+@app.route("/registrar_veterinario", methods=["GET", "POST"])
+def registrar_veterinario():
+    if request.method == "POST":
+        # Capturar los datos del formulario
+        idEVeterinario= int(request.form["idVeterinario"])
+        nombreVeterinario = request.form["nombreVeterinario"]
+        apellidoVeterinario = request.form["apellidoVeterinario"]
+        telefonoVeterinario = request.form["telefonoVeterinario"]
+        correoVeterinario = request.form["correoVeterinario"]
+        direccionVeterinario = request.form["direccionVeterinario"]
+        idEspecialidad = int(request.form["idEspecialidad"])
+        estado = int(request.form["estado"])
+
+        # Crear un diccionario con los datos del veterinario
+        datos_veterinario = {
+            "idVeterinario": idEVeterinario,
+            "nombreVeterinario": nombreVeterinario,
+            "apellidoVeterinario": apellidoVeterinario,
+            "telefonoVeterinario": telefonoVeterinario,
+            "correoVeterinario": correoVeterinario,
+            "direccionVeterinario": direccionVeterinario,
+            "idEspecialidad": idEspecialidad,
+            "estado": estado
+        }
+
+        # Guardar los datos en la base de datos
+        guardar_datos_veterinario(datos_veterinario)
+        flash("Veterinario registrado correctamente.", "success")
+        return redirect(url_for("registrar_veterinario"))  # Recarga la página actual
+    else:
+        # Obtener la lista de especialidades para el formulario
+        especialidades = obtener_especialidades()
+        return render_template("registrarveterinario.html", especialidades=especialidades)
+
+# Función para guardar los datos del veterinario en la base de datos
+def guardar_datos_veterinario(datos):
+    conexion = conectar_mysql()
+    if conexion is None:
+        return
+
+    try:
+        cursor = conexion.cursor()
+        query = """
+        INSERT INTO veterinario (idVeterinario, nombreVeterinario, apellidoVeterinario, telefonoVeterinario, correoVeterinario, direccionVeterinario, idEspecialidad, estado)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """
+        valores = (
+            datos["idVeterinario"],
+            datos["nombreVeterinario"],
+            datos["apellidoVeterinario"],
+            datos["telefonoVeterinario"],
+            datos["correoVeterinario"],
+            datos["direccionVeterinario"],
+            datos["idEspecialidad"],
+            datos["estado"]
+        )
+        cursor.execute(query, valores)
+        conexion.commit()
+        print("Datos del veterinario guardados correctamente.")
+    except mysql.connector.Error as err:
+        print(f"Error al guardar los datos: {err}")
+    finally:
+        cursor.close()
+        conexion.close()
+
+# Función para obtener la lista de especialidades
+def obtener_especialidades():
+    conexion = conectar_mysql()
+    if conexion is None:
+        return []
+
+    try:
+        cursor = conexion.cursor(dictionary=True)
+        cursor.execute("SELECT idEspecialidad, descripcionEspecialidad FROM especialidad WHERE estado = 1")  # Solo especialidades activas
+        especialidades = cursor.fetchall()
+        return especialidades
+    except mysql.connector.Error as err:
+        print(f"Error al obtener las especialidades: {err}")
+        return []
+    finally:
+        cursor.close()
+        conexion.close()
+
+@app.route("/informes_veterinarios")
+def informes_veterinarios():
+    conexion = conectar_mysql()
+    if conexion is None:
+        return "Error al conectar a la base de datos", 500
+
+    try:
+        cursor = conexion.cursor(dictionary=True)
+        query = """
+        SELECT v.idVeterinario, v.nombreVeterinario, v.apellidoVeterinario, v.telefonoVeterinario, v.correoVeterinario, v.direccionVeterinario, e.descripcionEspecialidad, v.estado
+        FROM veterinario v
+        JOIN especialidad e ON v.idEspecialidad = e.idEspecialidad
+        """
+        cursor.execute(query)
+        veterinarios = cursor.fetchall()
+        return render_template("informesveterinario.html", veterinarios=veterinarios)
+    except mysql.connector.Error as err:
+        print(f"Error al obtener los datos de los veterinarios: {err}")
+        return "Error al obtener los datos de los veterinarios", 500
     finally:
         cursor.close()
         conexion.close()

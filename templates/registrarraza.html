@@ -13,6 +13,10 @@
             <img alt="Logo Ganaderos Unidos" class="h-16" height="100" src="../static/imagenes/Logo-pagina.png" width="100"/>
         </a>
         <h1 class="text-2xl font-bold text-gray-800">Registrar Raza</h1>
+        <div class="max-w-2xl mx-auto mt-6 flex justify-between">
+            <a href="{{ url_for('inicio') }}" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition duration-300">Ir a Inicio</a>
+            <a href="{{ url_for('informes_razas') }}" class="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-300">Ir a Informes</a>
+        </div>
     </div>
 
     <form action="{{ url_for('registrar_raza') }}" method="POST" class="max-w-2xl mx-auto mt-8 bg-white p-6 rounded-lg shadow-md">

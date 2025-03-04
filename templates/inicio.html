@@ -8,18 +8,20 @@
     <link rel="stylesheet" href="../static/css/inicio.css">
 </head>
 <body>
-    <div class="header">
+    <div class="header flex justify-between items-center p-4 bg-gray-100"">
         <a href="{{ url_for('inicio') }}">
             <img alt="Logo Ganaderos Unidos " class="h-16" height="100" src="../static/imagenes/Logo-pagina.png" width="100"/>
         </a>
             
-        
                 <span>
                     
                 </span>
         </div>
     </div>
     <div class="main-content">
+        <div class="button-row">
+            <a href="perfil.html" class="action-button">Perfil</a>
+        </div>
         <div class="button-row">
             <a href="{{ url_for('registrar_animal') }}" class="action-button">Registrar animal</a>
             <a href="{{ url_for('registrar_raza') }}" class="action-button">Registrar Raza</a>
@@ -31,6 +33,10 @@
         <div class="button-row">
             <a href="{{ url_for('registrar_empleado') }}" class="action-button">Registrar empleado</a>
             <a href="{{ url_for('registrar_historial_animal') }}" class="action-button">Registrar historial</a>
+        </div>
+        <div class="button-row">
+            <a href="{{ url_for('registrar_veterinario') }}" class="action-button">Registrar veterinario</a>
+            <a href="{{ url_for('registrar_especialidad') }}" class="action-button">Registrar especialidad</a>
         </div>
         <div class="button-row">
             <a href="{{ url_for('registrar_vacuna') }}" class="action-button">Registrar vacunas</a>
@@ -48,14 +54,12 @@
             <a href="{{ url_for('informes_razas') }}" class="action-button">Informes de razas</a>
         </div>
         <div class="button-row">
+            <a href="{{ url_for('informes_veterinarios') }}" class="action-button">Informes de veterinarios</a>
+            <a href="{{ url_for('informes_especialidades') }}" class="action-button">Informes especialidades</a>
+        </div>
+        <div class="button-row">
             <a href="{{ url_for('informes_registro_animal') }}" class="action-button">Informes del registro de animales</a>
         </div>
-        <!-- 
-        <div class="button-row">
-            <a href="perfil.html" class="action-button">Perfil</a>
-        </div>
-        -->
-        
     </div>
 </body>
 </html>
