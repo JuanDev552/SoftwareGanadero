@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informes del registro de animales</title>
+    <link rel="stylesheet" href="../static/css/informes.css">
+</head>
+<body>
+    <div class="header bg-white shadow-md p-4 flex items-center justify-between">
+        <a href="{{ url_for('inicio') }}">
+            <img alt="Logo Ganaderos Unidos" class="h-16" height="100" src="../static/imagenes/Logo-pagina.png" width="100"/>
+        </a>
+        <h1 class="text-2xl font-bold text-gray-800">Informes del registro de animales</h1>
+    </div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Raza</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>Sexo</th>
+                    <th>Peso</th>
+                    <th>Estado de salud</th>
+                    <th>Nombre del animal</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for animal in animales %}
+                <tr>
+                    <td>{{ animal.idAnimal }}</td>
+                    <td>{{ animal.descripcionRaza }}</td>
+                    <td>{{ animal.fechaNacimiento }}</td>
+                    <td>{{ animal.sexoAnimal }}</td>
+                    <td>{{ animal.pesoAnimal }}</td>
+                    <td>{{ animal.estadoSalud }}</td>
+                    <td>{{ animal.nomAnimal }}</td>
+                    <td>{{ 'Activo' if animal.estado == 1 else 'Inactivo' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

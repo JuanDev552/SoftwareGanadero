@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informes de Vacunas</title>
+    <link rel="stylesheet" href="../static/css/informes.css">
+</head>
+<body>
+    <div class="header bg-white shadow-md p-4 flex items-center justify-between">
+        <a href="{{ url_for('inicio') }}">
+            <img alt="Logo Ganaderos Unidos" class="h-16" height="100" src="../static/imagenes/Logo-pagina.png" width="100"/>
+        </a>
+        <h1 class="text-2xl font-bold text-gray-800">Informes de Vacunas</h1>
+    </div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha de Vacunación</th>
+                    <th>Tipo de Vacuna</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vacuna in vacunas %}
+                <tr>
+                    <td>{{ vacuna.idVacuna }}</td>
+                    <td>{{ vacuna.fechaVacunacion }}</td>
+                    <td>{{ vacuna.descripcionVacuna }}</td>
+                    <td>{{ 'Activo' if vacuna.estado == 1 else 'Inactivo' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

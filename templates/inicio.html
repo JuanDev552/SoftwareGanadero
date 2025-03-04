@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="../static/css/inicio.css">
+</head>
+<body>
+    <div class="header">
+        <a href="{{ url_for('inicio') }}">
+            <img alt="Logo Ganaderos Unidos " class="h-16" height="100" src="../static/imagenes/Logo-pagina.png" width="100"/>
+        </a>
+            
+        
+                <span>
+                    
+                </span>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="button-row">
+            <a href="{{ url_for('registrar_animal') }}" class="action-button">Registrar animal</a>
+            <a href="{{ url_for('registrar_raza') }}" class="action-button">Registrar Raza</a>
+        </div>
+        <div class="button-row">
+            <a href="{{ url_for('registrar_tratamiento') }}" class="action-button">Registrar tratamientos</a>
+            <a href="{{ url_for('registrar_tipo_vacuna') }}" class="action-button">Registrar tipos de vacuna</a>
+        </div>
+        <div class="button-row">
+            <a href="{{ url_for('registrar_empleado') }}" class="action-button">Registrar empleado</a>
+            <a href="{{ url_for('registrar_historial_animal') }}" class="action-button">Registrar historial</a>
+        </div>
+        <div class="button-row">
+            <a href="{{ url_for('registrar_vacuna') }}" class="action-button">Registrar vacunas</a>
+        </div>
+        <div class="button-row">
+            <a href="{{ url_for('informes_tratamientos') }}" class="action-button">Informes de tratamientos</a>
+            <a href="{{ url_for('informes_tipos_vacuna') }}" class="action-button">Informes de tipos de vacunas</a>
+        </div>
+        <div class="button-row">
+            <a href="{{ url_for('informes_empleados') }}" class="action-button">Informes de empleados</a>
+            <a href="{{ url_for('informes_historial_animal') }}" class="action-button">Informes de historial</a>
+        </div>
+        <div class="button-row">
+            <a href="{{ url_for('informes_vacunas') }}" class="action-button">Informes de vacunas</a>
+            <a href="{{ url_for('informes_razas') }}" class="action-button">Informes de razas</a>
+        </div>
+        <div class="button-row">
+            <a href="{{ url_for('informes_registro_animal') }}" class="action-button">Informes del registro de animales</a>
+        </div>
+        <!-- 
+        <div class="button-row">
+            <a href="perfil.html" class="action-button">Perfil</a>
+        </div>
+        -->
+        
+    </div>
+</body>
+</html>

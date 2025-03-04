@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informes de Empleados</title>
+    <link rel="stylesheet" href="../static/css/informes.css">
+</head>
+<body>
+    <div class="header bg-white shadow-md p-4 flex items-center justify-between">
+        <a href="{{ url_for('inicio') }}">
+            <img alt="Logo Ganaderos Unidos" class="h-16" height="100" src="../static/imagenes/Logo-pagina.png" width="100"/>
+        </a>
+        <h1 class="text-2xl font-bold text-gray-800">Informes de Empleados</h1>
+    </div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Estado Civil</th>
+                    <th>Teléfono</th>
+                    <th>Fecha de Ingreso</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for empleado in empleados %}
+                <tr>
+                    <td>{{ empleado.idEmpleado }}</td>
+                    <td>{{ empleado.nombreEmpleado }}</td>
+                    <td>{{ empleado.apellidoEmpleado }}</td>
+                    <td>{{ empleado.estadoCivil }}</td>
+                    <td>{{ empleado.telefonoEmpleado }}</td>
+                    <td>{{ empleado.fechaIngreso }}</td>
+                    <td>{{ empleado.fechaNacimiento }}</td>
+                    <td>{{ 'Activo' if empleado.estado == 1 else 'Inactivo' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

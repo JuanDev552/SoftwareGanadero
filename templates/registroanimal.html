@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar animal</title>
+    <link rel="stylesheet" href="../static/css/registroanimal.css">
+</head>
+<body>
+    <div class="header bg-white shadow-md p-4 flex items-center justify-between">
+        <a href="{{ url_for('inicio') }}">
+            <img alt="Logo Ganaderos Unidos" class="h-16" height="100" src="../static/imagenes/Logo-pagina.png" width="100"/>
+        </a>
+        <h1 class="text-2xl font-bold text-gray-800">Registrar animal</h1>
+    </div>
+
+    <form action="{{ url_for('registrar_animal') }}" method="POST" class="max-w-2xl mx-auto mt-8 bg-white p-6 rounded-lg shadow-md">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="form-group">
+                <label for="idAnimal" class="block text-sm font-medium text-gray-700">ID animal</label>
+                <input id="idAnimal" name="idAnimal" type="number" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required/>
+            </div>
+            <div class="form-group">
+                <label for="fechaNacimiento" class="block text-sm font-medium text-gray-700">Fecha de nacimiento</label>
+                <input id="fechaNacimiento" name="fechaNacimiento" type="date" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required/>
+            </div>
+            <div class="form-group">
+                <label for="sexoAnimal" class="block text-sm font-medium text-gray-700">Sexo</label>
+                <select id="sexoAnimal" name="sexoAnimal" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+                    <option value="M">Macho</option>
+                    <option value="H">Hembra</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pesoAnimal" class="block text-sm font-medium text-gray-700">Peso (kg)</label>
+                <input id="pesoAnimal" name="pesoAnimal" type="number" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required/>
+            </div>
+            <div class="form-group">
+                <label for="estadoSalud" class="block text-sm font-medium text-gray-700">Estado de salud</label>
+                <input id="estadoSalud" name="estadoSalud" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required/>
+            </div>
+            <div class="form-group">
+                <label for="nomAnimal" class="block text-sm font-medium text-gray-700">Nombre del animal</label>
+                <input id="nomAnimal" name="nomAnimal" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required/>
+            </div>
+            <div class="form-group">
+                <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
+                <select id="estado" name="estado" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="idRaza" class="block text-sm font-medium text-gray-700">Raza</label>
+                <select id="idRaza" name="idRaza" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+                    {% for raza in razas %}
+                        <option value="{{ raza.idRaza }}">{{ raza.descripcionRaza }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="button-container mt-6">
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">Crear</button>
+        </div>
+    </form>
+</body>
+</html>

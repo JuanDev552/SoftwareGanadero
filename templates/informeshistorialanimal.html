@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>informes del historial del animal</title>
+    <link rel="stylesheet" href="../static/css/informes.css">
+</head>
+<body>
+    <div class="header">
+        <a href="{{ url_for('inicio') }}">
+            <img alt="Logo Ganaderos Unidos " class="h-16" height="100" src="../static/imagenes/Logo-pagina.png" width="100"/>
+        </a>
+        <h1>informes del historial del animal</h1>
+    </div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha del historial</th>
+                    <th>ID del animal</th>
+                    <th>Estado</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for historial in historiales %}
+                <tr>
+                    <td>{{ historial.idHistorial }}</td>
+                    <td>{{ historial.fechaHistorial }}</td>
+                    <td>{{ historial.idAnimal }}</td>
+                    <td>{{ 'Activo' if historial.estado == 1 else 'Inactivo' }}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Historial del Animal</title>
+    <link rel="stylesheet" href="../static/css/registroanimal.css">
+</head>
+<body>
+    <div class="header bg-white shadow-md p-4 flex items-center justify-between">
+        <a href="{{ url_for('inicio') }}">
+            <img alt="Logo Ganaderos Unidos" class="h-16" height="100" src="../static/imagenes/Logo-pagina.png" width="100"/>
+        </a>
+        <h1 class="text-2xl font-bold text-gray-800">Registrar Historial del Animal</h1>
+    </div>
+
+    <form action="{{ url_for('registrar_historial_animal') }}" method="POST" class="max-w-2xl mx-auto mt-8 bg-white p-6 rounded-lg shadow-md">
+        <div class="grid grid-cols-1 gap-6">
+            <div class="form-group">
+                <label for="idHistorial" class="block text-sm font-medium text-gray-700">ID Historial</label>
+                <input id="idHistorial" name="idHistorial" type="number" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required/>
+            </div>
+            <div class="form-group">
+                <label for="fechaHistorial" class="block text-sm font-medium text-gray-700">Fecha del Historial</label>
+                <input id="fechaHistorial" name="fechaHistorial" type="date" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required/>
+            </div>
+            <div class="form-group">
+                <label for="idAnimal" class="block text-sm font-medium text-gray-700">ID del Animal</label>
+                <select id="idAnimal" name="idAnimal" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+                    {% for animal in animales %}
+                        <option value="{{ animal.idAnimal }}">{{ animal.nomAnimal }} (ID: {{ animal.idAnimal }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
+                <select id="estado" name="estado" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+            </div>
+        </div>
+        <div class="button-container mt-6">
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">Crear</button>
+        </div>
+    </form>
+</body>
+</html>
